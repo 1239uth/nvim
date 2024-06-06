@@ -1,6 +1,3 @@
--- local mason_registry = require("mason-registry")
--- local vue_language_server_path = mason_registry.get_package("vue-language-server"):get_install_path()
--- .. "/node_modules/@vue/language-server"
 return {
   {
     "nvim-treesitter/nvim-treesitter",
@@ -52,13 +49,13 @@ return {
       },
     },
   },
-  -- {
-  --   "williamboman/mason.nvim",
-  --   opts = function(_, opts)
-  --     opts.ensure_installed = opts.ensure_installed or {}
-  --     vim.list_extend(opts.ensure_installed, { "vue-language-server" })
-  --   end,
-  -- },
+  {
+    "williamboman/mason.nvim",
+    opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
+      vim.list_extend(opts.ensure_installed, { "vue-language-server" })
+    end,
+  },
   -- Utils
   {
     "dmmulroy/tsc.nvim",
