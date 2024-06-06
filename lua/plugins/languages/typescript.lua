@@ -1,19 +1,41 @@
+-- local mason_registry = require("mason-registry")
+-- local vue_language_server_path = mason_registry.get_package("vue-language-server"):get_install_path()
+-- .. "/node_modules/@vue/language-server"
 return {
   {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
       if type(opts.ensure_installed) == "table" then
-        vim.list_extend(opts.ensure_installed, { "typescript", "tsx" })
+        vim.list_extend(opts.ensure_installed, { "typescript", "tsx", "vue" })
       end
     end,
   },
 
   -- LSP
+
   {
     "pmizio/typescript-tools.nvim",
-    ft = { "typescript", "typescriptreact" },
-    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-    opts = {},
+    ft = { "typescript", "typescriptreact", "vue" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      {
+        "neovim/nvim-lspconfig",
+        opts = {
+          servers = {
+            volar = {},
+          },
+        },
+      },
+    },
+    opts = {
+      tsserver_plugins = {
+        {
+          name = "@vue/typescript-plugin",
+          languages = { "javascript", "typescript", "vue" },
+        },
+      },
+      filetypes = { "typescript", "typescriptreact", "vue" },
+    },
   },
 
   -- Disable tsserver with lspconfig since we're using typescript-tools.nvim
@@ -30,7 +52,13 @@ return {
       },
     },
   },
-
+  -- {
+  --   "williamboman/mason.nvim",
+  --   opts = function(_, opts)
+  --     opts.ensure_installed = opts.ensure_installed or {}
+  --     vim.list_extend(opts.ensure_installed, { "vue-language-server" })
+  --   end,
+  -- },
   -- Utils
   {
     "dmmulroy/tsc.nvim",
