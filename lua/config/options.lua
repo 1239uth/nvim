@@ -11,6 +11,11 @@ vim.diagnostic.config({
 
 vim.opt.mousescroll = "ver:1,hor:6" -- Default: "ver:3,hor:6"
 
+-- Add the following options to make tailwind classes more visually appealing
+vim.opt.wrap = true
+vim.opt.linebreak = true
+vim.opt.breakindent = true
+
 vim.g.root_spec = { { ".git", "lua" }, "lsp", "cwd" }
 
 vim.filetype.add({
