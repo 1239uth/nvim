@@ -33,7 +33,7 @@ require("lazy").setup({
 
     { import = "lazyvim.plugins.extras.dap" },
     { import = "lazyvim.plugins.extras.ui.edgy" },
-    { import = "lazyvim.plugins.extras.coding.codeium" },
+    -- { import = "lazyvim.plugins.extras.coding.codeium" },
 
     -- My local plugin imports
     { import = "plugins" },

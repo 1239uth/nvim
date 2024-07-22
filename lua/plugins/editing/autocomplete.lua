@@ -138,11 +138,25 @@ return {
         documentation = require("cmp").config.window.bordered(),
       }
       -- disable ghost text for autocomplete since copilot is using ghost text
-      -- opts.experimental = {
-      --   ghost_text = false,
-      -- }
-
+      opts.experimental = {
+        ghost_text = false,
+      }
       return opts
+    end,
+  },
+  {
+    "Exafunction/codeium.vim",
+    event = "BufEnter",
+    init = function()
+      vim.keymap.set("i", "<c-j>", function()
+        return vim.fn["codeium#CycleCompletions"](1)
+      end, { expr = true, silent = true })
+      vim.keymap.set("i", "<c-k>", function()
+        return vim.fn["codeium#CycleCompletions"](-1)
+      end, { expr = true, silent = true })
+      vim.keymap.set("i", "<c-e>", function()
+        return vim.fn["codeium#Clear"]()
+      end, { expr = true, silent = true })
     end,
   },
 }
