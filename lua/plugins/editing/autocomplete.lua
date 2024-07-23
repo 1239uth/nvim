@@ -1,5 +1,20 @@
 -- override default nvim-cmp to add border around the completion window
 return {
+  {
+    "Exafunction/codeium.vim",
+    event = "BufEnter",
+    init = function()
+      vim.keymap.set("i", "<c-j>", function()
+        return vim.fn["codeium#CycleCompletions"](1)
+      end, { expr = true, silent = true })
+      vim.keymap.set("i", "<c-k>", function()
+        return vim.fn["codeium#CycleCompletions"](-1)
+      end, { expr = true, silent = true })
+      vim.keymap.set("i", "<c-e>", function()
+        return vim.fn["codeium#Clear"]()
+      end, { expr = true, silent = true })
+    end,
+  },
   -- {
   --   "zbirenbaum/copilot.lua",
   --   cmd = "Copilot",
@@ -142,21 +157,6 @@ return {
         ghost_text = false,
       }
       return opts
-    end,
-  },
-  {
-    "Exafunction/codeium.vim",
-    event = "BufEnter",
-    init = function()
-      vim.keymap.set("i", "<c-j>", function()
-        return vim.fn["codeium#CycleCompletions"](1)
-      end, { expr = true, silent = true })
-      vim.keymap.set("i", "<c-k>", function()
-        return vim.fn["codeium#CycleCompletions"](-1)
-      end, { expr = true, silent = true })
-      vim.keymap.set("i", "<c-e>", function()
-        return vim.fn["codeium#Clear"]()
-      end, { expr = true, silent = true })
     end,
   },
 }
